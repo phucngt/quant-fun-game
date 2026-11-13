@@ -13,22 +13,16 @@
   const ROLE_COLOR = { boss: '#ffc56b', quant: '#a8b9fa', trader: '#7fd1e8', risk: '#f2a37a', portfolio: '#c79bf2' };
   const DEFAULT_TEAM = { boss: 'phuc', quant: 'jim', portfolio: 'ray', trader: 'paul', risk: 'ed' };
   /* trạm làm việc: spot = chỗ đứng phía màn hình của bàn, look = tâm cụm màn hình (đo trên ảnh phóng) */
-  const STATIONS = {
-    boss: { desk: 'rear@31.4,64.8', spot: [26.8, 60.8], look: [30.7, 52.3] },
-    portfolio: { desk: 'left@35.4,67.5', spot: [36.1, 63.5], look: [36.5, 53.0] },
-    quant: { desk: 'left@46.7,53.0', spot: [47.4, 49.0], look: [46.8, 39.3] },
-    trader: { desk: 'right@55.4,78.7', spot: [52.6, 80.2], look: [54.5, 64.0] },
-    risk: { desk: 'left@62.6,76.0', spot: [63.4, 79.4], look: [62.2, 62.5] },
-  };
+  const STATIONS = NAVIGATION.stations;
+  const navigation = new window.QFNavigation(NAVIGATION);
   const HOME = Object.fromEntries(Object.entries(STATIONS).map(([r, v]) => [r, v.spot]));
   function dirFace(dx, dy) { return dy > 0 ? (dx < 0 ? 'front-left' : 'front-right') : (dx < 0 ? 'rear-left' : 'rear-right'); }
   const TALK = { boss: 'front-right', quant: 'front-left', portfolio: 'front-left', trader: 'front-left', risk: 'front-left' };
   const WORK = Object.fromEntries(Object.entries(STATIONS).map(([r, v]) => [r, dirFace((v.look[0] - v.spot[0]) * 1600 / 100, (v.look[1] - v.spot[1]) * 1195 / 100)]));
-  const WP1 = [34, 70.5], STOP = [30.2, 66.8];
+  const STOP = NAVIGATION.spots.STOP;
   const TAG_SHIFT = { boss: '-40%', quant: '28%', portfolio: '32%', risk: '26%' };
   const IDLE = { boss: 'bạn', quant: 'chờ giao việc', trader: 'chờ tín hiệu', risk: 'trực hạn mức 25% NAV', portfolio: 'giữ sổ danh mục' };
-  const DESKS = [['rear', 31.4, 64.8, 64], ['left', 35.4, 67.5, 68], ['rear', 42.4, 50.4, 50],
-    ['left', 46.7, 53.0, 53], ['left', 62.6, 76.0, 76], ['right', 55.4, 78.7, 79]];
+  const DESKS = NAVIGATION.desks.map(d => [d.kind, ...d.at, d.z]);
   const LEG = Object.fromEntries(ASSETS.legends.map(l => [l.id, l.name]));
   const CANCEL = { cancel: true };
   const KEY = 'quantfun.settings.v1';
@@ -130,6 +124,7 @@
     actors[role] = a;
   }
   function setPos(a, x, y) {
+    if (!navigation.contains([x,y])) throw new Error('Feet outside floor: ' + a.role + ' ' + x + ',' + y);
     a.x = x; a.y = y;
     a.el.style.left = x + '%'; a.el.style.top = y + '%'; a.el.style.zIndex = Math.round(y) + 17;
     a.label.style.left = x + '%'; a.label.style.top = `calc(${y}% - 14%)`; a.label.style.zIndex = 400 + Math.round(y);
@@ -205,11 +200,24 @@
   }
   function clampBubble(a) {
     a.bubble.style.setProperty('--bx', '0px');
+    a.bubble.style.setProperty('--by', '0px');
+    a.bubble.style.animation = 'none';
     const rr = room.getBoundingClientRect(), br = a.bubble.getBoundingClientRect();
-    if (!rr.width) return;
-    let sh = 0;
-    if (br.left < rr.left + 4) sh = rr.left + 4 - br.left; else if (br.right > rr.right - 4) sh = rr.right - 4 - br.right;
-    a.bubble.style.setProperty('--bx', sh + 'px');
+    if (!rr.width) { a.bubble.style.animation = ''; return; }
+    const tags=ROLES.filter(r=>r!==a.role).map(r=>actors[r].tag.getBoundingClientRect());
+    const lo=rr.left+4-br.left,hi=rr.right-4-br.right;
+    const xs=[Math.max(lo,Math.min(hi,0)),...tags.flatMap(t=>[t.left-br.right-8,t.right-br.left+8])];
+    const ys=[0,...tags.map(t=>t.top-br.bottom-8)];
+    const choices=[];
+    for(const x of xs)for(const y of ys){
+      if(x<lo||x>hi||br.top+y<rr.top+4||br.bottom+y>rr.bottom-4)continue;
+      if(tags.some(t=>br.right+x>t.left-4&&br.left+x<t.right+4&&br.bottom+y>t.top-4&&br.top+y<t.bottom+4))continue;
+      choices.push({x,y,cost:Math.abs(x)+Math.abs(y)*1.4});
+    }
+    choices.sort((a,b)=>a.cost-b.cost);
+    const best=choices[0]||{x:Math.max(lo,Math.min(hi,0)),y:0};
+    a.bubble.style.setProperty('--bx',best.x+'px');a.bubble.style.setProperty('--by',best.y+'px');
+    void a.bubble.offsetWidth; a.bubble.style.animation='';
   }
   function say(role, text, hold = false, side = null) {
     const a = actors[role];
@@ -410,28 +418,48 @@
     const alive = typeof ctl === 'function' ? ctl : () => ctl === seq;
     return new Promise((res, rej) => {
       if (!pts.length) { res(); return; }
-      if (instant()) { const p = pts[pts.length - 1]; setPos(a, p[0], p[1]); res(); return; }
-      let i = 0, from = [a.x, a.y];
-      a.el.classList.add('walking'); const wt0 = performance.now();
+      const goal = pts[pts.length - 1], move = a.move = (a.move || 0) + 1;
+      const blocks = (radius=.86) => ROLES.filter(r=>r!==a.role).flatMap(r=>[
+        { point:HOME[r], radius:.95 },
+        { point:[actors[r].x,actors[r].y], radius }
+      ]);
+      if (!navigation.contains(goal)) { rej(new Error('Unwalkable destination')); return; }
+      if (instant()) {
+        if (!alive()) { rej(CANCEL); return; }
+        if (navigation.path([a.x,a.y],goal,blocks())) { setPos(a,...goal); res(); return; }
+        rej(new Error('Unreachable destination')); return;
+      }
+      let route = null, index = 0, last = null, planned = -Infinity;
+      a.el.classList.add('walking'); const wt0 = performance.now(); a.trafficWaiting = false;
       if (motionOk() && animReady(a)) { a.walkAct = true; a.el.classList.add('acting'); }
-      const seg = () => {
-        if (i >= pts.length) { a.el.classList.remove('walking'); endWalkAct(a); res(); return; }
-        const to = pts[i], f = from;
-        const dx = (to[0] - f[0]) * W / 100, dy = (to[1] - f[1]) * H / 100;
-        setFace(a, dirFace(dx, dy));
-        const dur = Math.hypot(to[0] - f[0], (to[1] - f[1]) * RATIO) / (22 * speed() * mul) * 1000;
-        let t0 = null;
-        const frame = t => { try {
-          if (!alive()) { a.el.classList.remove('walking'); endWalkAct(a); rej(CANCEL); return; }
-          if (t0 === null) t0 = t;
-          const k = dur <= 0 ? 1 : Math.min(1, (t - t0) / dur);
-          setPos(a, f[0] + (to[0] - f[0]) * k, f[1] + (to[1] - f[1]) * k);
-          if (a.walkAct) { a.cur = { action: 'walk', i: Math.floor((performance.now() - wt0) / 1000 * 7.5 * speed()) % 4 }; paintAct(a); }
-          if (k < 1) requestAnimationFrame(frame); else { from = to; i++; seg(); }
-        } catch (err) { a.el.classList.remove('walking'); endWalkAct(a); rej(err); } };
-        requestAnimationFrame(frame);
+      const finish = error => {
+        if (a.move === move) { a.el.classList.remove('walking'); a.trafficWaiting=false; endWalkAct(a); }
+        if (error) rej(error); else res();
       };
-      seg();
+      const frame = t => { try {
+          if (!alive() || a.move !== move) { finish(CANCEL); return; }
+          const dt=last===null ? 0 : Math.min(50,t-last); last=t;
+          if (!route && t-planned>=250) {
+            route=navigation.path([a.x,a.y],goal,blocks()); index=0; planned=t;
+          }
+          a.trafficWaiting=!route;
+          let budget=22*speed()*mul*dt/1000 / 2; // 2% room width = one 32px tile
+          while(route && budget>0) {
+            if(index>=route.length){finish();return;}
+            const to=route[index],from=[a.x,a.y],distance=navigation.distance(from,to);
+            if(distance<1e-6){index++;continue;}
+            const step=Math.min(distance,budget,.125),k=step/distance;
+            const next=[from[0]+(to[0]-from[0])*k,from[1]+(to[1]-from[1])*k];
+            if(!navigation.segmentClear(from,next,blocks(.81))){route=null;a.trafficWaiting=true;break;}
+            setFace(a,dirFace((to[0]-from[0])*W/100,(to[1]-from[1])*H/100));
+            setPos(a,...next); budget-=step;
+            if(step>=distance-1e-6)index++;
+          }
+          if (a.walkAct) { a.cur = { action: 'walk', i: Math.floor((performance.now() - wt0) / 1000 * 7.5 * speed()) % 4 }; paintAct(a); }
+          if(route && index>=route.length){finish();return;}
+        requestAnimationFrame(frame);
+      } catch(err){finish(err);} };
+      requestAnimationFrame(frame);
     });
   }
   function settle(s) {
@@ -444,31 +472,15 @@
     else if (s.pending) { setFace(t, WORK.trader); setStatus(t, 'chờ khớp ở nến kế', 'busy'); }
     else if (s.blocked) setStatus(actors.risk, 'Block', 'block');
   }
-  const backFromBoss = tok => { actors.trader.tagbox.style.removeProperty('--tx'); return walk(actors.trader, [WP1, HOME.trader], tok); };
-  const goStop = tok => walk(actors.trader, [WP1, STOP], tok);
+  const backFromBoss = tok => { actors.trader.tagbox.style.removeProperty('--tx'); return walk(actors.trader, [HOME.trader], tok); };
+  const goStop = tok => walk(actors.trader, [STOP], tok);
 
 
   /* ================= ambient world: routines, desk poses ================= */
-  const NODES = {
-    Hb: HOME.boss, Hp: HOME.portfolio, Hq: HOME.quant, Ht: HOME.trader, Hr: HOME.risk, STOP, WP1,
-    BW: [26.5, 72.5], WLa: [22.5, 64], WIN: [21, 55], VB: [29.5, 68.5],
-    P1: [36.5, 69], VP: [42.5, 67], C1: [44, 60], C2: [49, 60], C3: [47, 71], C4: [69.5, 57.5], C5: [70.5, 66], C7: [58, 83.5],
-    Q1: [47.4, 54.5], VQ: [52.5, 53.5], VT: [49, 76.5], VR: [68.5, 75],
-    WC: [54.5, 50.5], WB: [72.5, 58.5], CO: [77.0, 61.0], SN: [83.4, 64.3], PR: [87.4, 64.6],
-  };
-  const EDGES = [['Hb', 'WLa'], ['WLa', 'WIN'], ['WLa', 'BW'], ['BW', 'VB'], ['VB', 'STOP'], ['BW', 'WP1'], ['STOP', 'WP1'], ['WP1', 'P1'], ['Hp', 'P1'], ['P1', 'VP'],
-    ['VP', 'C3'], ['VP', 'C1'], ['C1', 'Q1'], ['Hq', 'Q1'], ['Q1', 'VQ'], ['Q1', 'C2'], ['VQ', 'WC'], ['VQ', 'C4'], ['C1', 'C2'], ['C2', 'C4'], ['C2', 'C3'],
-    ['C3', 'VT'], ['VT', 'Ht'], ['C3', 'C7'], ['C4', 'C5'], ['C5', 'CO'], ['CO', 'SN'], ['SN', 'PR'], ['C5', 'WB'], ['WB', 'WC'], ['C5', 'VR'], ['VR', 'Hr'], ['VR', 'C7']];
-  const ADJ = {}; for (const [p, q] of EDGES) { (ADJ[p] = ADJ[p] || []).push(q); (ADJ[q] = ADJ[q] || []).push(p); }
+  const NODES = {...navigation.nodes,...NAVIGATION.spots};
+  const EDGES = navigation.edges;
   const HOMEN = { boss: 'Hb', quant: 'Hq', trader: 'Ht', risk: 'Hr', portfolio: 'Hp' };
-  const CHATSPOT = { boss: 'VB', quant: 'VQ', trader: 'VT', risk: 'VR', portfolio: 'VP' };
-  function bfs(from, to) {
-    if (from === to) return [from];
-    const prev = { [from]: null }, q = [from];
-    while (q.length) { const n = q.shift(); for (const m of ADJ[n] || []) if (!(m in prev)) { prev[m] = n; if (m === to) { const path = [m]; let k = n; while (k) { path.unshift(k); k = prev[k]; } return path; } q.push(m); } }
-    return [from, to];
-  }
-  const nearestNode = (x, y) => Object.keys(NODES).reduce((b, k) => (Math.hypot(NODES[k][0] - x, NODES[k][1] - y) < Math.hypot(NODES[b][0] - x, NODES[b][1] - y) ? k : b), 'C1');
+  const CHATSPOT = { boss: 'Vb', quant: 'Vq', trader: 'Vt', risk: 'Vr', portfolio: 'Vp' };
   const ICONS = {
     cup: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 4h9v6a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3z" fill="#eef1fb"/><path d="M12 5h1.5a1.5 1.5 0 0 1 0 4H12" fill="none" stroke="#eef1fb" stroke-width="1.5"/><rect x="3" y="4" width="9" height="2" fill="#7fd1e8"/></svg>',
     marker: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 14l1-4 8-8 3 3-8 8z" fill="#ffc56b"/><path d="M2 14l1-4 3 3z" fill="#eef1fb"/></svg>',
@@ -481,7 +493,7 @@
     { id: 'coffee', node: 'CO', look: [78.8, 46.6], obj: [78.8, 49.2], walk: 'đi pha cà phê', phases: [{ status: 'pha cà phê', prop: 'espresso-idle', on: true, ms: 2500 }, { status: 'uống cà phê', prop: 'espresso-idle', on: false, pose: 'coffee', ms: [3000, 5000] }] },
     { id: 'window', node: 'WIN', look: [18.2, 36], obj: [18.2, 51.3], walk: 'đi ngắm phố', phases: [{ status: 'nhìn phố', pose: 'phone' }] },
   ];
-  const DOOR = [69.5, 46];
+  const DOOR = NAVIGATION.door;
   const lookFace = (a, look) => setFace(a, dirFace((look[0] - a.x) * W / 100, (look[1] - a.y) * H / 100));
   const FLICK = Object.fromEntries(Object.entries(STATIONS).map(([r, v]) => [r, [v.look[0] - 3.6, v.look[1] - 3, 7.2, 5.6]]));
   const flick = {};
@@ -521,10 +533,8 @@
     takenSpots.clear(); pantryState('espresso-idle', false); pantryState('printer-idle', false);
   }
   const asleep = (ms, alive) => new Promise((res, rej) => setTimeout(() => (alive() ? res() : rej(CANCEL)), ms / speed()));
-  async function routeTo(a, target, alive, mul = 1, from) {
-    const start = from || nearestNode(a.x, a.y);
-    const pts = bfs(start, target).map(n => NODES[n]).filter((p, i) => !(i === 0 && Math.hypot(p[0] - a.x, p[1] - a.y) < 0.3));
-    await walk(a, pts, alive, mul);
+  async function routeTo(a, target, alive, mul = 1) {
+    await walk(a, [NODES[target]], alive, mul);
   }
   function makeOpt(a, id) {
     if (id.startsWith('chat:')) {
@@ -579,7 +589,7 @@
       clearFx(a); setStatus(a, opt.walk, 'busy');
       if (g) {
         let cancelled = false;
-        try { await routeTo(a, opt.node, chatAlive, 1, HOMEN[a.role]); } catch (e) { if (e === CANCEL && alive()) cancelled = true; else throw e; }
+        try { await routeTo(a, opt.node, chatAlive); } catch (e) { if (e === CANCEL && alive()) cancelled = true; else throw e; }
         if (!cancelled && !alive()) throw CANCEL;
         if (!cancelled && !chatAlive()) cancelled = true;
         if (!cancelled) {
@@ -598,7 +608,7 @@
         releaseGuest(g, a);
         if (cancelled) { clearFx(a); setStatus(a, 'thôi để sau'); await asleepRaw(1000, alive); }
       } else {
-        await routeTo(a, opt.node, alive, 1, HOMEN[a.role]);
+        await routeTo(a, opt.node, alive);
         await runPhases(a, opt, alive);
       }
       setStatus(a, 'quay về bàn');
@@ -634,7 +644,7 @@
       const a = actors[r];
       const moved = !a.wd || Math.hypot(a.x - a.wd.x, a.y - a.wd.y) > .05;
       if (moved) a.wd = { x: a.x, y: a.y, t };
-      if (a.free && a.inRoutine && /^(đi |quay về bàn|sang chỗ)/.test(a.status || '') && t - a.wd.t > 2000) { a.wd = null; recover(a); }
+      if (a.free && a.inRoutine && !a.trafficWaiting && /^(đi |quay về bàn|sang chỗ)/.test(a.status || '') && t - a.wd.t > 2000) { a.wd = null; recover(a); }
     }
   }
   setInterval(watchdog, 500);
@@ -684,7 +694,7 @@
     await Promise.race([Promise.all(jobs), new Promise(res => setTimeout(res, 1500))]);
     for (const a of all) { a.rtok++; a.el.classList.remove('walking'); endWalkAct(a); clearPose(a); setPos(a, ...HOME[a.role]); setFace(a, TALK[a.role]); }
   }
-  window.__qf = { work(r) { const a = actors[r]; a.working = true; deskPose(a); }, stations: STATIONS, stop: STOP, state: r => { const a = actors[r]; return { reservedBy: a.reservedBy ? a.reservedBy.role : null, chatWith: a.chatWith ? a.chatWith.role : null, inRoutine: a.inRoutine, free: a.free }; }, nodes: NODES, edges: EDGES, pois: POIS.map(p => ({ id: p.id, node: p.node, spot: NODES[p.node], look: p.look, obj: p.obj })), door: DOOR, force(role, id) { const a = actors[role]; if (!a || !a.free || a.inRoutine || a.reservedBy) return false; const o = makeOpt(a, id); if (!o) return false; routine(a, o); return true; } };
+  window.__qf = { navigation, work(r, working=true) { const a = actors[r]; a.working = working; a.variant=false; deskPose(a); }, stations: STATIONS, stop: STOP, state: r => { const a = actors[r]; return { reservedBy: a.reservedBy ? a.reservedBy.role : null, chatWith: a.chatWith ? a.chatWith.role : null, inRoutine: a.inRoutine, free: a.free, waiting: !!a.trafficWaiting }; }, nodes: NODES, edges: EDGES, pois: POIS.map(p => ({ id: p.id, node: p.node, spot: NODES[p.node], look: p.look, obj: p.obj })), door: DOOR, force(role, id) { const a = actors[role]; if (!a || !a.free || a.inRoutine || a.reservedBy) return false; const o = makeOpt(a, id); if (!o) return false; routine(a, o); return true; } };
 
   /* ================= chat model ================= */
   let msgs = [], nextId = 1, lastCount = 0, forceBottom = false;
@@ -849,7 +859,7 @@
     setStatus(trader, 'mang đề xuất tới Boss', 'busy');
     setFace(risk, WORK.risk); setStatus(risk, 'kiểm tra hạn mức', 'busy');
     await goStop(tok);
-    setFace(trader, 'front-left'); setStatus(trader, 'trình đề xuất', 'busy'); trader.tagbox.style.setProperty('--tx', '34%');
+    lookFace(trader, HOME.boss); setStatus(trader, 'trình đề xuất', 'busy'); trader.tagbox.style.setProperty('--tx', '34%');
     const p = s.proposal || s.blocked;
     const detail = p.side === 'buy' ? ` ${p.allocation}% NAV, giá tham chiếu ${money(p.mark)}.`
       : ` Bán hết ${s.quantity.toFixed(3)} BTC, giá tham chiếu ${money(p.mark)}.`;
@@ -874,7 +884,7 @@
     takenSpots.add('PR');
     try {
       setStatus(a, 'đi lấy bản in', 'busy');
-      await routeTo(a, 'PR', alive, 1, HOMEN.portfolio);
+      await routeTo(a, 'PR', alive);
       const ph = POIS.find(p => p.id === 'printer');
       await runPhases(a, { ...ph, phases: ph.phases.map(x => ({ ...x, ms: 2000 })) }, alive);
       setStatus(a, 'quay về bàn'); await routeTo(a, HOMEN.portfolio, alive);

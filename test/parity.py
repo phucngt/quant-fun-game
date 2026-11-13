@@ -1,12 +1,15 @@
 import json, sys, importlib.util, os
 sys.dont_write_bytecode = True
-RUN = '/home/claude/quant-fun/pixel-agents'
+from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+RUN = str(ROOT / 'reference')
+sys.path.insert(0, os.environ.get('QF_REFERENCE_ROOT', str(ROOT / '.python-deps')))
 sys.path.insert(0, RUN)
 spec = importlib.util.spec_from_file_location('run', RUN + '/run.py')
 run = importlib.util.module_from_spec(spec); spec.loader.exec_module(run)
 HERE = os.path.dirname(os.path.abspath(__file__))
-bars = json.load(open(HERE + '/../assets/bars.json'))
-scen = json.load(open(HERE + '/scenarios.json'))
+bars = json.load(open(HERE + '/../assets/bars.json', encoding='utf-8'))
+scen = json.load(open(HERE + '/scenarios.json', encoding='utf-8'))
 
 def step(desk, name, data, out):
     try:

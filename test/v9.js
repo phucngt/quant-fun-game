@@ -58,4 +58,5 @@ const clip = async (p, x0, y0, x1, y1) => { const b = await p.locator('#room').b
   }
   await browser.close();
   console.log(JSON.stringify(info, null, 1)); console.log('ERRORS', JSON.stringify(errs)); console.log('FAILS', JSON.stringify(fails, null, 1));
+  process.exitCode = errs.length || fails.length ? 1 : 0;
 })();

@@ -2,3 +2,14 @@ out/
 __pycache__/
 node_modules/
 shots/
+!docs/shots/
+/docs/shots/*
+!/docs/shots/navigation-floor.png
+!/docs/shots/navigation-stations.png
+.venv/
+.python-deps/
+gen/
+test/py_snapshots.json
+/debug.log
+/test/god-test.html
+/test/god-bad.html

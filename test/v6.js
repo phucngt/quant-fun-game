@@ -63,21 +63,21 @@ async function waitFor(p, fn, ms, step = 80) { const t0 = Date.now(); while (Dat
   info.anchor = anchor;
 
   // 2. walking via forced routine: frames 0..3 and column by direction
-  const walkers = ['quant', 'portfolio'];
+  const walker = 'boss'; // Longer route: the shortest Quant -> cooler trip can finish in <4 frames.
   const seenFrames = new Set(), colOk = []; let walkShot = false;
-  await p.evaluate(() => { window.__rec = []; const a = document.getElementById('actor-quant'), d = a.querySelector('.act'); new MutationObserver(() => { if (a.classList.contains('walking') && d.dataset.action === 'walk') window.__rec.push([+d.dataset.frame, +d.dataset.col, a.dataset.facing]); }).observe(d, { attributes: true, attributeFilter: ['data-frame', 'data-col'] }); });
-  const forced = await p.evaluate(() => window.__qf.force('quant', 'cooler'));
+  await p.evaluate(r => { window.__rec = []; const a = document.getElementById('actor-'+r), d = a.querySelector('.act'); new MutationObserver(() => { if (a.classList.contains('walking') && d.dataset.action === 'walk') window.__rec.push([+d.dataset.frame, +d.dataset.col, a.dataset.facing]); }).observe(d, { attributes: true, attributeFilter: ['data-frame', 'data-col'] }); },walker);
+  const forced = await p.evaluate(r => window.__qf.force(r, 'cooler'),walker);
   check('force cooler', forced, forced);
   const t0 = Date.now(); let sawWalk = false, hid = true;
   while (Date.now() - t0 < 20000) {
-    const s = await act(p, 'quant');
+    const s = await act(p, walker);
     if (s.walking && s.acting && s.action === 'walk') {
       sawWalk = true; seenFrames.add(s.frame); colOk.push(s.col === COLS.indexOf(s.facing)); hid = hid && s.bodyVis === 'hidden' && s.actDisp === 'block';
-      if (!walkShot && seenFrames.size >= 2) { walkShot = true; await p.screenshot({ path: SH + '/v6-walk-closeup.png', clip: await clip(p, 'quant') }); }
+      if (!walkShot && seenFrames.size >= 2) { walkShot = true; await p.screenshot({ path: SH + '/v6-walk-closeup.png', clip: await clip(p, walker) }); }
     }
     if (/lấy nước/.test(s.st || '') && s.action === 'water' && !info.water) {
       info.water = true; check('water pose no icon', !s.icon, s);
-      await p.waitForTimeout(400); await p.screenshot({ path: SH + '/v6-water.png', clip: await clip(p, 'quant') });
+      await p.waitForTimeout(400); await p.screenshot({ path: SH + '/v6-water.png', clip: await clip(p, walker) });
       break;
     }
     await p.waitForTimeout(40);
@@ -90,7 +90,7 @@ async function waitFor(p, fn, ms, step = 80) { const t0 = Date.now(); while (Dat
   check('walk frames 0..3', [0, 1, 2, 3].every(f => seenFrames.has(f)), [...seenFrames]);
   check('water pose reached', info.water, 0);
   // after routine: back to idle
-  await waitFor(p, async () => { const s = await act(p, 'quant'); return !s.acting || s.action === 'type-standing'; }, 25000);
+  await waitFor(p, async () => { const s = await act(p, walker); return !s.acting || s.action === 'type-standing'; }, 25000);
 
   // 4. typing alternates 2 frames (retry windows: a loop can end mid-observation)
   let tres = null;

@@ -1,0 +1,36 @@
+{
+  "width": 1600,
+  "height": 1195,
+  "tilePixels": 32,
+  "gridPixels": 8,
+  "paddingTiles": 0.6,
+  "floor": [[3.2,62.8],[43.4,37.1],[95.4,64.2],[54.1,94.2]],
+  "deskHeightPercent": 17.3,
+  "deskFootprints": {
+    "rear": [[5,86],[66,62],[98,73],[34,99]],
+    "left": [[4,86],[65,62],[98,74],[35,99]],
+    "right": [[2,74],[34,62],[97,86],[66,99]]
+  },
+  "desks": [
+    {"id":"boss-desk","kind":"rear","at":[31.4,64.8],"z":64},
+    {"id":"spare-desk","kind":"left","at":[35.4,67.5],"z":68},
+    {"id":"portfolio-desk","kind":"rear","at":[42.4,50.4],"z":50},
+    {"id":"quant-desk","kind":"left","at":[46.7,53.0],"z":53},
+    {"id":"risk-desk","kind":"left","at":[62.6,76.0],"z":76},
+    {"id":"trader-desk","kind":"right","at":[55.4,78.7],"z":79}
+  ],
+  "obstacles": [
+    {"id":"counter","polygon":[[72.3,56.3],[77.0,53.8],[90.2,60.0],[86.7,63.6]]},
+    {"id":"cooler","polygon":[[53.7,44.2],[57.1,43.0],[59.5,44.9],[56.7,46.8]]},
+    {"id":"extinguisher","polygon":[[4.9,57.0],[6.4,56.2],[7.4,57.8],[6.0,59.0]]}
+  ],
+  "stations": {
+    "boss":{"desk":"boss-desk","near":[25.5,60.4],"look":[30.7,52.3]},
+    "portfolio":{"desk":"portfolio-desk","near":[36.5,46.0],"look":[41.7,37.9]},
+    "quant":{"desk":"quant-desk","near":[46.7,55.0],"look":[46.8,39.3]},
+    "trader":{"desk":"trader-desk","near":[52.6,80.2],"look":[54.5,64.0]},
+    "risk":{"desk":"risk-desk","near":[63.4,78.2],"look":[62.2,62.5]}
+  },
+  "spots": {"WIN":[21,55],"WC":[54.5,50.5],"WB":[72.5,58.5],"CO":[77,61],"PR":[87.4,65.5],"SN":[83.4,65.0]},
+  "door": [69.5,46]
+}

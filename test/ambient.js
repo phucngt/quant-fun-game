@@ -2,14 +2,14 @@ const { chromium } = require('playwright');
 const path = require('path');
 const B = path.resolve(__dirname, '..');
 const URL = 'file://' + B + '/out/download/quant-fun.html', SH = B + '/shots';
-const RECTS = { A1: [26.5, 50, 33, 59], A2: [31, 52, 41.5, 61.5], B1: [38.5, 36, 44, 43.5], B2: [42, 38, 50.5, 46.3], C1: [50.5, 61, 60.5, 72], C2: [58, 59.5, 68.5, 70] };
-const HOME = { boss: [26.8, 60.8], portfolio: [36.1, 63.5], quant: [47.4, 49.0], trader: [54.5, 74.2], risk: [63.3, 72.0] };
+const Navigation = require('../src/navigation.js');
+const nav = new Navigation(require('../assets/navigation.json'));
+const HOME = Object.fromEntries(Object.entries(nav.data.stations).map(([r,s])=>[r,s.spot]));
 async function waitHome(p, r) { for (let i = 0; i < 300; i++) { const v = await p.evaluate(r => { const a = document.getElementById('actor-' + r); return !a.classList.contains('walking') && !/^(đi |quay|sang|thôi)/.test(a.dataset.status || ''); }, r); if (v) return; await p.waitForTimeout(100); } }
 async function waitFor2(p, r) { await waitHome(p, r); await p.waitForTimeout(300); }
 const ROLES = Object.keys(HOME), errs = [], fails = [];
 const check = (n, ok, i) => { if (!ok) fails.push(n + ' ' + JSON.stringify(i)); };
-// static check: graph edges avoid desk rects
-function segHitsRect(a, b, r) { for (let t = 0; t <= 1; t += .01) { const x = a[0] + (b[0] - a[0]) * t, y = a[1] + (b[1] - a[1]) * t; if (x > r[0] && x < r[2] && y > r[1] && y < r[3]) return true; } return false; }
+// All graph edges must stay inside the generated floor, including furniture clearance.
 (async () => {
   const browser = await chromium.launch();
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2 });
@@ -20,8 +20,8 @@ function segHitsRect(a, b, r) { for (let t = 0; t <= 1; t += .01) { const x = a[
   p.on('request', r => { if (!/^(file|data):/.test(r.url())) errs.push('request: ' + r.url()); });
   await p.goto(URL); await p.waitForSelector('#title:not([hidden])'); await p.click('#deploy'); await p.waitForSelector('#messages .msg');
   const g = await p.evaluate(() => ({ n: window.__qf.nodes, e: window.__qf.edges }));
-  for (const [a, b] of g.e) for (const [k, r] of Object.entries(RECTS)) check('edge ' + a + '-' + b + ' vs ' + k, !segHitsRect(g.n[a], g.n[b], r));
-  for (const [k, v] of Object.entries(g.n)) for (const [rk, r] of Object.entries(RECTS)) check('node ' + k + ' in ' + rk, !(v[0] > r[0] && v[0] < r[2] && v[1] > r[1] && v[1] < r[3]));
+  for (const [a,b] of g.e) check('edge '+a+'-'+b+' stays on floor',nav.segmentClear(g.n[a],g.n[b]));
+  for (const [k,v] of Object.entries(g.n)) check('node '+k+' on floor',nav.contains(v));
   const snapState = () => p.evaluate(() => Object.fromEntries(['boss', 'quant', 'trader', 'risk', 'portfolio'].map(r => { const a = document.getElementById('actor-' + r); const ll = a.querySelector('.fig.on .ll'); return [r, { x: parseFloat(a.style.left), y: parseFloat(a.style.top), walking: a.classList.contains('walking'), st: a.dataset.status, ll: getComputedStyle(ll).transform, lb: getComputedStyle(a.querySelector('.fig.on .lb')).transform, face: a.dataset.facing }]; })));
   const left = {}, back = {}, away = {}; let inRect = [], legT = new Set(), bodyT = new Set(), maxAway = 0, shots = {}, statuses = new Set();
   const t0 = Date.now();
@@ -41,7 +41,7 @@ function segHitsRect(a, b, r) { for (let t = 0; t <= 1; t += .01) { const x = a[
     for (const r of ROLES) {
       const o = s[r], d = Math.hypot(o.x - HOME[r][0], o.y - HOME[r][1]);
       statuses.add(o.st);
-      for (const [k, rc] of Object.entries(RECTS)) if (o.x > rc[0] && o.x < rc[2] && o.y > rc[1] && o.y < rc[3]) inRect.push([r, o.x, o.y, k]);
+      if (!nav.contains([o.x,o.y])) inRect.push([r,o.x,o.y]);
       if (d > 1.5) { left[r] = true; aw++; } else if (left[r]) back[r] = true;
       if (o.walking) { legT.add(o.ll); bodyT.add(o.lb); if (!shots.walk && d > 3) { shots.walk = r; await p.screenshot({ path: SH + '/v3-walk-closeup.png', clip: await clipAround(p, r) }); } }
       if (!shots.cooler && /lấy nước/.test(o.st) && !/đi/.test(o.st)) { shots.cooler = r; await p.locator('#room').screenshot({ path: SH + '/v3-cooler.png' }); }
@@ -79,7 +79,7 @@ function segHitsRect(a, b, r) { for (let t = 0; t <= 1; t += .01) { const x = a[
   await p.waitForSelector('.mcard.decision.pass', { timeout: 20000 });
   await p.waitForTimeout(3000);
   out.mid = { forced, midPos, trader: await p.$eval('#actor-trader', e => e.style.left + ',' + e.style.top + ' ' + e.dataset.facing + ' ' + e.dataset.status), boss: await p.$eval('#actor-boss', e => e.style.left + ',' + e.style.top), approveChip: await p.$$eval('#chips button', b => b.map(x => x.textContent + (x.disabled ? '(disabled)' : ''))) };
-  check('trader at boss desk', (() => { const m = out.mid.trader.split(',').map(parseFloat); return Math.hypot(m[0] - 30.2, m[1] - 66.8) < 1.5; })(), out.mid);
+  check('trader at boss desk', (() => { const m = out.mid.trader.split(',').map(parseFloat),s=nav.data.spots.STOP; return Math.hypot(m[0]-s[0],m[1]-s[1])<.3; })(), out.mid);
   check('Approve enabled', out.mid.approveChip[0] === 'Approve', out.mid.approveChip);
   await p.screenshot({ path: SH + '/v3-mid-proposal.png' });
   // reset puts everyone home
@@ -115,7 +115,7 @@ function segHitsRect(a, b, r) { for (let t = 0; t <= 1; t += .01) { const x = a[
   // cooldown >= 6 s for both
   let cdBad = false; const t2 = Date.now();
   await waitHome(p, 'quant');
-  const tr = relAt; while (Date.now() - tr < 5600) { for (const r of ['quant', 'portfolio']) { const i = await info2(r); if (/^(đi |sang chỗ|lấy|uống|ghi chú|xem|đọc|nhìn phố|nhìn mưa)/.test(i.st) && !/trao/.test(i.st)) cdBad = true; } await p.waitForTimeout(100); }
+  const tr = relAt; while (Date.now() - tr < 5600) { for (const r of ['quant', 'portfolio']) { if ((await st(r)).inRoutine) cdBad = true; } await p.waitForTimeout(100); }
   check('cooldown 6s', !cdBad, 0);
   // event on B mid-walk of A
   await settleHome(); await p.waitForTimeout(6500);

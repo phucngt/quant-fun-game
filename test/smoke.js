@@ -86,7 +86,7 @@ const check = (name, ok, info) => { if (!ok) fails.push(name + ' ' + (info === u
   out.reset = { progress: await txt(p, '#progress-text'), nav: await txt(p, '#nav'), cash: await txt(p, '#cash'), pnl: await txt(p, '#pnl'), exp: await txt(p, '#exposure'),
     msgs: await p.$$eval('#messages .msg', m => m.length), trader: await p.$eval('#actor-trader', e => e.style.left + ',' + e.style.top), boss: await txt(p, '#tag-boss .nm') };
   check('reset values', out.reset.nav === '$100,000.00' && out.reset.cash === '$100,000.00' && out.reset.pnl === '$0.00' && out.reset.exp === '0.00%' && out.reset.progress.startsWith('Nến 30/160'), out.reset);
-  check('reset trader home', out.reset.trader === '52.6%,80.2%'); check('reset keeps name', out.reset.boss.startsWith('Phúc'));
+  check('reset trader home', await p.evaluate(() => { const a=document.getElementById('actor-trader'),h=window.__qf.stations.trader.spot; return Math.hypot(parseFloat(a.style.left)-h[0],parseFloat(a.style.top)-h[1])<.001; })); check('reset keeps name', out.reset.boss.startsWith('Phúc'));
   await toProposal(p);
   out.reset.allocationInProposal = await txt(p, '.mcard.proposal');
   check('allocation 20 after reset', /20% NAV/.test(out.reset.allocationInProposal), out.reset.allocationInProposal);
@@ -163,7 +163,7 @@ const check = (name, ok, info) => { if (!ok) fails.push(name + ' ' + (info === u
   await cmd(r, '/giao'); await r.waitForTimeout(1000);
   for (let i = 0; i < 13; i++) await cmd(r, '/next');
   const samples = [];
-  for (let i = 0; i < 9; i++) { samples.push(await r.evaluate(() => document.getElementById('actor-trader').style.left + ' ' + document.getElementById('actor-trader').dataset.facing + ' bubble=' + document.getElementById('bubble-trader').classList.contains('show'))); await r.waitForTimeout(250); }
+  for (let i = 0; i < 60; i++) { const sample=await r.evaluate(() => { const a=document.getElementById('actor-trader');return {point:[parseFloat(a.style.left),parseFloat(a.style.top)],face:a.dataset.facing,walking:a.classList.contains('walking'),bubble:document.getElementById('bubble-trader').classList.contains('show')}; });samples.push(sample);if(sample.bubble)break;await r.waitForTimeout(100); }
   out.walk = samples;
   out.overlap = null;
   for (let i = 0; i < 40 && !out.overlap; i++) {
@@ -173,8 +173,9 @@ const check = (name, ok, info) => { if (!ok) fails.push(name + ' ' + (info === u
     if (!out.overlap) await r.waitForTimeout(100);
   }
   check('trader bubble clear of boss tag', out.overlap && !out.overlap.overlap && out.overlap.inside, out.overlap);
-  check('walk faces', samples.some(s => /rear-left/.test(s)) && samples.some(s => /front-left bubble=true/.test(s)), samples);
-  check('bubble after arrival', !samples.some(s => /^(3[3-9]|[4-5]\d)/.test(s) === false && /bubble=true/.test(s) && !/^30\.2%/.test(s)) , samples);
+  const stop=await r.evaluate(()=>window.__qf.stop);
+  check('walk faces', samples.some(s=>s.walking&&s.face==='rear-left') && samples.some(s=>!s.walking&&s.bubble),samples);
+  check('bubble after arrival', samples.filter(s=>s.bubble).every(s=>Math.hypot(s.point[0]-stop[0],s.point[1]-stop[1])<.01&&!s.walking),samples);
   await r.screenshot({ path: SH + '/v2-game-realtime-1440.png' });
   await r.context().close();
 

@@ -1,0 +1,16 @@
+{
+  "name": "quant-fun-game",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node tools/run-python.js build.py",
+    "test": "node test/smoke.js",
+    "test:navigation": "node test/navigation.js",
+    "test:ambient": "node test/ambient.js",
+    "test:all": "node tools/checks.js",
+    "test:parity": "node tools/run-python.js test/parity.py && node test/parity.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.0"
+  }
+}

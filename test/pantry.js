@@ -20,7 +20,7 @@ const inPoly = (x, y, P) => { let c = false; for (let i = 0, j = P.length - 1; i
   const props = await p.evaluate(() => [...document.querySelectorAll('.room>img.pantry')].map(e => ({ id: e.dataset.prop, x: parseFloat(e.style.left), y: parseFloat(e.style.top), hidden: e.hidden, z: +getComputedStyle(e).zIndex, w: e.getBoundingClientRect().width })));
   info.props = props.map(o => o.id + '@' + o.x + ',' + o.y);
   for (const o of props) check('anchor on counter ' + o.id, inPoly(o.x, o.y, POLY), o);
-  check('10 prop images minus 5 hidden alt', props.length === 7 && props.filter(o => o.hidden).length === 2, props.length);
+  check('4 pantry props and 2 hidden animation variants', props.length === 6 && props.filter(o => o.hidden).length === 2, props.length);
   const tagZ = await p.evaluate(() => Math.min(...[...document.querySelectorAll('.label')].map(e => +e.style.zIndex)));
   check('props below tags and bubbles', props.every(o => o.z < tagZ), [props.map(o => o.z), tagZ]);
   const actorZ = await p.evaluate(() => Math.min(...[...document.querySelectorAll('.actor')].map(e => +e.style.zIndex)));
@@ -95,11 +95,12 @@ const inPoly = (x, y, P) => { let c = false; for (let i = 0, j = P.length - 1; i
     if (/^đi lấy bản in/.test(i.st)) trip.walked = true;
     if (/^chờ bản in/.test(i.st) && !i.w) { trip.printing = pv; trip.face = i.face; }
     if (/^lấy bản in/.test(i.st) && !i.w) trip.taking = true;
-    if (trip.taking && /^(nhìn quanh|giữ sổ|gõ phím)/.test(i.st)) { trip.home = Math.hypot(i.x - 36.1, i.y - 63.5) < 0.6; break; }
+    if (trip.taking && /^(nhìn quanh|giữ sổ|gõ phím)/.test(i.st)) { const home=await p.evaluate(()=>window.__qf.stations.portfolio.spot);trip.home = Math.hypot(i.x-home[0],i.y-home[1]) < 0.6; break; }
     await p.waitForTimeout(80);
   }
   check('PM fetches slip after fill', trip.walked && trip.printing === true && trip.taking && trip.home, trip);
   info.slip = trip;
+  process.exitCode = errs.length || fails.length ? 1 : 0;
   await browser.close();
   console.log(JSON.stringify(info, null, 1)); console.log('ERRORS', JSON.stringify(errs)); console.log('FAILS', JSON.stringify(fails, null, 1));
 })();
