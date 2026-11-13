@@ -1,0 +1,115 @@
+{
+  "referenceRoomWidth": 737,
+  "sprites": [
+    {
+      "id": "espresso-idle",
+      "file": "espresso-idle.png",
+      "width": 278,
+      "height": 337,
+      "anchor": {
+        "x": 139,
+        "y": 332
+      },
+      "suggestedWidthAt737px": 37
+    },
+    {
+      "id": "espresso-brewing",
+      "file": "espresso-brewing.png",
+      "width": 278,
+      "height": 337,
+      "anchor": {
+        "x": 139,
+        "y": 332
+      },
+      "suggestedWidthAt737px": 37
+    },
+    {
+      "id": "coffee-beans",
+      "file": "coffee-beans.png",
+      "width": 278,
+      "height": 267,
+      "anchor": {
+        "x": 139,
+        "y": 262
+      },
+      "suggestedWidthAt737px": 22
+    },
+    {
+      "id": "mug-tray",
+      "file": "mug-tray.png",
+      "width": 315,
+      "height": 202,
+      "anchor": {
+        "x": 158,
+        "y": 197
+      },
+      "suggestedWidthAt737px": 24
+    },
+    {
+      "id": "water-pitcher",
+      "file": "water-pitcher.png",
+      "width": 330,
+      "height": 314,
+      "anchor": {
+        "x": 165,
+        "y": 309
+      },
+      "suggestedWidthAt737px": 25
+    },
+    {
+      "id": "fruit-tray",
+      "file": "fruit-tray.png",
+      "width": 339,
+      "height": 228,
+      "anchor": {
+        "x": 170,
+        "y": 223
+      },
+      "suggestedWidthAt737px": 26
+    },
+    {
+      "id": "pastry-plate",
+      "file": "pastry-plate.png",
+      "width": 307,
+      "height": 197,
+      "anchor": {
+        "x": 154,
+        "y": 192
+      },
+      "suggestedWidthAt737px": 25
+    },
+    {
+      "id": "microwave",
+      "file": "microwave.png",
+      "width": 349,
+      "height": 296,
+      "anchor": {
+        "x": 175,
+        "y": 291
+      },
+      "suggestedWidthAt737px": 39
+    },
+    {
+      "id": "printer-idle",
+      "file": "printer-idle.png",
+      "width": 510,
+      "height": 446,
+      "anchor": {
+        "x": 255,
+        "y": 438
+      },
+      "suggestedWidthAt737px": 40
+    },
+    {
+      "id": "printer-printing",
+      "file": "printer-printing.png",
+      "width": 510,
+      "height": 446,
+      "anchor": {
+        "x": 255,
+        "y": 438
+      },
+      "suggestedWidthAt737px": 40
+    }
+  ]
+}

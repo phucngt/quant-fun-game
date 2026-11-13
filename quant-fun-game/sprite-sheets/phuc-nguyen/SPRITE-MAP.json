@@ -1,0 +1,126 @@
+{
+  "cell": {
+    "width": 96,
+    "height": 112,
+    "baseline": 107,
+    "x": 48
+  },
+  "columns": [
+    "front-left",
+    "front-right",
+    "rear-left",
+    "rear-right"
+  ],
+  "groups": [
+    {
+      "file": "phuc-nguyen.png",
+      "rows": [
+        {
+          "row": 0,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "idle",
+          "frame": 0
+        },
+        {
+          "row": 1,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 2,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 3,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 4,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 5,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 6,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 7,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 8,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 9,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 10,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 11,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "open-notebook",
+          "frame": 0
+        },
+        {
+          "row": 12,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "check-phone",
+          "frame": 0
+        },
+        {
+          "row": 13,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "read-book",
+          "frame": 0
+        },
+        {
+          "row": 14,
+          "persona": "phuc-nguyen",
+          "name": "Phuc Nguyen",
+          "action": "take-notes",
+          "frame": 0
+        }
+      ]
+    }
+  ]
+}

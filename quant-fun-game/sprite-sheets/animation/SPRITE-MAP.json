@@ -1,0 +1,1810 @@
+{
+  "cell": {
+    "width": 96,
+    "height": 112,
+    "baseline": 107,
+    "x": 48
+  },
+  "columns": [
+    "front-left",
+    "front-right",
+    "rear-left",
+    "rear-right"
+  ],
+  "groups": [
+    {
+      "file": "animation-01.png",
+      "rows": [
+        {
+          "row": 0,
+          "persona": "arthur-hayes",
+          "name": "Arthur Hayes",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 1,
+          "persona": "arthur-hayes",
+          "name": "Arthur Hayes",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 2,
+          "persona": "arthur-hayes",
+          "name": "Arthur Hayes",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 3,
+          "persona": "arthur-hayes",
+          "name": "Arthur Hayes",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 4,
+          "persona": "arthur-hayes",
+          "name": "Arthur Hayes",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 5,
+          "persona": "arthur-hayes",
+          "name": "Arthur Hayes",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 6,
+          "persona": "arthur-hayes",
+          "name": "Arthur Hayes",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 7,
+          "persona": "arthur-hayes",
+          "name": "Arthur Hayes",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 8,
+          "persona": "arthur-hayes",
+          "name": "Arthur Hayes",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 9,
+          "persona": "arthur-hayes",
+          "name": "Arthur Hayes",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 10,
+          "persona": "arthur-hayes",
+          "name": "Arthur Hayes",
+          "action": "open-notebook",
+          "frame": 0
+        },
+        {
+          "row": 11,
+          "persona": "arthur-hayes",
+          "name": "Arthur Hayes",
+          "action": "check-phone",
+          "frame": 0
+        },
+        {
+          "row": 12,
+          "persona": "jim-simons",
+          "name": "Jim Simons",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 13,
+          "persona": "jim-simons",
+          "name": "Jim Simons",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 14,
+          "persona": "jim-simons",
+          "name": "Jim Simons",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 15,
+          "persona": "jim-simons",
+          "name": "Jim Simons",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 16,
+          "persona": "jim-simons",
+          "name": "Jim Simons",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 17,
+          "persona": "jim-simons",
+          "name": "Jim Simons",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 18,
+          "persona": "jim-simons",
+          "name": "Jim Simons",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 19,
+          "persona": "jim-simons",
+          "name": "Jim Simons",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 20,
+          "persona": "jim-simons",
+          "name": "Jim Simons",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 21,
+          "persona": "jim-simons",
+          "name": "Jim Simons",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 22,
+          "persona": "jim-simons",
+          "name": "Jim Simons",
+          "action": "read-book",
+          "frame": 0
+        },
+        {
+          "row": 23,
+          "persona": "jim-simons",
+          "name": "Jim Simons",
+          "action": "take-notes",
+          "frame": 0
+        },
+        {
+          "row": 24,
+          "persona": "cathie-wood",
+          "name": "Cathie Wood",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 25,
+          "persona": "cathie-wood",
+          "name": "Cathie Wood",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 26,
+          "persona": "cathie-wood",
+          "name": "Cathie Wood",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 27,
+          "persona": "cathie-wood",
+          "name": "Cathie Wood",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 28,
+          "persona": "cathie-wood",
+          "name": "Cathie Wood",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 29,
+          "persona": "cathie-wood",
+          "name": "Cathie Wood",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 30,
+          "persona": "cathie-wood",
+          "name": "Cathie Wood",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 31,
+          "persona": "cathie-wood",
+          "name": "Cathie Wood",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 32,
+          "persona": "cathie-wood",
+          "name": "Cathie Wood",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 33,
+          "persona": "cathie-wood",
+          "name": "Cathie Wood",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 34,
+          "persona": "cathie-wood",
+          "name": "Cathie Wood",
+          "action": "read-book",
+          "frame": 0
+        },
+        {
+          "row": 35,
+          "persona": "cathie-wood",
+          "name": "Cathie Wood",
+          "action": "take-notes",
+          "frame": 0
+        },
+        {
+          "row": 36,
+          "persona": "warren-buffett",
+          "name": "Warren Buffett",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 37,
+          "persona": "warren-buffett",
+          "name": "Warren Buffett",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 38,
+          "persona": "warren-buffett",
+          "name": "Warren Buffett",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 39,
+          "persona": "warren-buffett",
+          "name": "Warren Buffett",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 40,
+          "persona": "warren-buffett",
+          "name": "Warren Buffett",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 41,
+          "persona": "warren-buffett",
+          "name": "Warren Buffett",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 42,
+          "persona": "warren-buffett",
+          "name": "Warren Buffett",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 43,
+          "persona": "warren-buffett",
+          "name": "Warren Buffett",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 44,
+          "persona": "warren-buffett",
+          "name": "Warren Buffett",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 45,
+          "persona": "warren-buffett",
+          "name": "Warren Buffett",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 46,
+          "persona": "warren-buffett",
+          "name": "Warren Buffett",
+          "action": "read-book",
+          "frame": 0
+        },
+        {
+          "row": 47,
+          "persona": "warren-buffett",
+          "name": "Warren Buffett",
+          "action": "take-notes",
+          "frame": 0
+        }
+      ]
+    },
+    {
+      "file": "animation-02.png",
+      "rows": [
+        {
+          "row": 0,
+          "persona": "george-soros",
+          "name": "George Soros",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 1,
+          "persona": "george-soros",
+          "name": "George Soros",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 2,
+          "persona": "george-soros",
+          "name": "George Soros",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 3,
+          "persona": "george-soros",
+          "name": "George Soros",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 4,
+          "persona": "george-soros",
+          "name": "George Soros",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 5,
+          "persona": "george-soros",
+          "name": "George Soros",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 6,
+          "persona": "george-soros",
+          "name": "George Soros",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 7,
+          "persona": "george-soros",
+          "name": "George Soros",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 8,
+          "persona": "george-soros",
+          "name": "George Soros",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 9,
+          "persona": "george-soros",
+          "name": "George Soros",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 10,
+          "persona": "george-soros",
+          "name": "George Soros",
+          "action": "read-book",
+          "frame": 0
+        },
+        {
+          "row": 11,
+          "persona": "george-soros",
+          "name": "George Soros",
+          "action": "take-notes",
+          "frame": 0
+        },
+        {
+          "row": 12,
+          "persona": "stanley-druckenmiller",
+          "name": "Stanley Druckenmiller",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 13,
+          "persona": "stanley-druckenmiller",
+          "name": "Stanley Druckenmiller",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 14,
+          "persona": "stanley-druckenmiller",
+          "name": "Stanley Druckenmiller",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 15,
+          "persona": "stanley-druckenmiller",
+          "name": "Stanley Druckenmiller",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 16,
+          "persona": "stanley-druckenmiller",
+          "name": "Stanley Druckenmiller",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 17,
+          "persona": "stanley-druckenmiller",
+          "name": "Stanley Druckenmiller",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 18,
+          "persona": "stanley-druckenmiller",
+          "name": "Stanley Druckenmiller",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 19,
+          "persona": "stanley-druckenmiller",
+          "name": "Stanley Druckenmiller",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 20,
+          "persona": "stanley-druckenmiller",
+          "name": "Stanley Druckenmiller",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 21,
+          "persona": "stanley-druckenmiller",
+          "name": "Stanley Druckenmiller",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 22,
+          "persona": "stanley-druckenmiller",
+          "name": "Stanley Druckenmiller",
+          "action": "read-book",
+          "frame": 0
+        },
+        {
+          "row": 23,
+          "persona": "stanley-druckenmiller",
+          "name": "Stanley Druckenmiller",
+          "action": "take-notes",
+          "frame": 0
+        },
+        {
+          "row": 24,
+          "persona": "paul-tudor-jones",
+          "name": "Paul Tudor Jones",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 25,
+          "persona": "paul-tudor-jones",
+          "name": "Paul Tudor Jones",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 26,
+          "persona": "paul-tudor-jones",
+          "name": "Paul Tudor Jones",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 27,
+          "persona": "paul-tudor-jones",
+          "name": "Paul Tudor Jones",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 28,
+          "persona": "paul-tudor-jones",
+          "name": "Paul Tudor Jones",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 29,
+          "persona": "paul-tudor-jones",
+          "name": "Paul Tudor Jones",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 30,
+          "persona": "paul-tudor-jones",
+          "name": "Paul Tudor Jones",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 31,
+          "persona": "paul-tudor-jones",
+          "name": "Paul Tudor Jones",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 32,
+          "persona": "paul-tudor-jones",
+          "name": "Paul Tudor Jones",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 33,
+          "persona": "paul-tudor-jones",
+          "name": "Paul Tudor Jones",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 34,
+          "persona": "paul-tudor-jones",
+          "name": "Paul Tudor Jones",
+          "action": "read-book",
+          "frame": 0
+        },
+        {
+          "row": 35,
+          "persona": "paul-tudor-jones",
+          "name": "Paul Tudor Jones",
+          "action": "take-notes",
+          "frame": 0
+        },
+        {
+          "row": 36,
+          "persona": "ray-dalio",
+          "name": "Ray Dalio",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 37,
+          "persona": "ray-dalio",
+          "name": "Ray Dalio",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 38,
+          "persona": "ray-dalio",
+          "name": "Ray Dalio",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 39,
+          "persona": "ray-dalio",
+          "name": "Ray Dalio",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 40,
+          "persona": "ray-dalio",
+          "name": "Ray Dalio",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 41,
+          "persona": "ray-dalio",
+          "name": "Ray Dalio",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 42,
+          "persona": "ray-dalio",
+          "name": "Ray Dalio",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 43,
+          "persona": "ray-dalio",
+          "name": "Ray Dalio",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 44,
+          "persona": "ray-dalio",
+          "name": "Ray Dalio",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 45,
+          "persona": "ray-dalio",
+          "name": "Ray Dalio",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 46,
+          "persona": "ray-dalio",
+          "name": "Ray Dalio",
+          "action": "read-book",
+          "frame": 0
+        },
+        {
+          "row": 47,
+          "persona": "ray-dalio",
+          "name": "Ray Dalio",
+          "action": "take-notes",
+          "frame": 0
+        }
+      ]
+    },
+    {
+      "file": "animation-03.png",
+      "rows": [
+        {
+          "row": 0,
+          "persona": "ed-thorp",
+          "name": "Ed Thorp",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 1,
+          "persona": "ed-thorp",
+          "name": "Ed Thorp",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 2,
+          "persona": "ed-thorp",
+          "name": "Ed Thorp",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 3,
+          "persona": "ed-thorp",
+          "name": "Ed Thorp",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 4,
+          "persona": "ed-thorp",
+          "name": "Ed Thorp",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 5,
+          "persona": "ed-thorp",
+          "name": "Ed Thorp",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 6,
+          "persona": "ed-thorp",
+          "name": "Ed Thorp",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 7,
+          "persona": "ed-thorp",
+          "name": "Ed Thorp",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 8,
+          "persona": "ed-thorp",
+          "name": "Ed Thorp",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 9,
+          "persona": "ed-thorp",
+          "name": "Ed Thorp",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 10,
+          "persona": "ed-thorp",
+          "name": "Ed Thorp",
+          "action": "read-book",
+          "frame": 0
+        },
+        {
+          "row": 11,
+          "persona": "ed-thorp",
+          "name": "Ed Thorp",
+          "action": "take-notes",
+          "frame": 0
+        },
+        {
+          "row": 12,
+          "persona": "jesse-livermore",
+          "name": "Jesse Livermore",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 13,
+          "persona": "jesse-livermore",
+          "name": "Jesse Livermore",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 14,
+          "persona": "jesse-livermore",
+          "name": "Jesse Livermore",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 15,
+          "persona": "jesse-livermore",
+          "name": "Jesse Livermore",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 16,
+          "persona": "jesse-livermore",
+          "name": "Jesse Livermore",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 17,
+          "persona": "jesse-livermore",
+          "name": "Jesse Livermore",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 18,
+          "persona": "jesse-livermore",
+          "name": "Jesse Livermore",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 19,
+          "persona": "jesse-livermore",
+          "name": "Jesse Livermore",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 20,
+          "persona": "jesse-livermore",
+          "name": "Jesse Livermore",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 21,
+          "persona": "jesse-livermore",
+          "name": "Jesse Livermore",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 22,
+          "persona": "jesse-livermore",
+          "name": "Jesse Livermore",
+          "action": "read-book",
+          "frame": 0
+        },
+        {
+          "row": 23,
+          "persona": "jesse-livermore",
+          "name": "Jesse Livermore",
+          "action": "take-notes",
+          "frame": 0
+        },
+        {
+          "row": 24,
+          "persona": "michael-saylor",
+          "name": "Michael Saylor",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 25,
+          "persona": "michael-saylor",
+          "name": "Michael Saylor",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 26,
+          "persona": "michael-saylor",
+          "name": "Michael Saylor",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 27,
+          "persona": "michael-saylor",
+          "name": "Michael Saylor",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 28,
+          "persona": "michael-saylor",
+          "name": "Michael Saylor",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 29,
+          "persona": "michael-saylor",
+          "name": "Michael Saylor",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 30,
+          "persona": "michael-saylor",
+          "name": "Michael Saylor",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 31,
+          "persona": "michael-saylor",
+          "name": "Michael Saylor",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 32,
+          "persona": "michael-saylor",
+          "name": "Michael Saylor",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 33,
+          "persona": "michael-saylor",
+          "name": "Michael Saylor",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 34,
+          "persona": "michael-saylor",
+          "name": "Michael Saylor",
+          "action": "read-book",
+          "frame": 0
+        },
+        {
+          "row": 35,
+          "persona": "michael-saylor",
+          "name": "Michael Saylor",
+          "action": "take-notes",
+          "frame": 0
+        },
+        {
+          "row": 36,
+          "persona": "raoul-pal",
+          "name": "Raoul Pal",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 37,
+          "persona": "raoul-pal",
+          "name": "Raoul Pal",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 38,
+          "persona": "raoul-pal",
+          "name": "Raoul Pal",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 39,
+          "persona": "raoul-pal",
+          "name": "Raoul Pal",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 40,
+          "persona": "raoul-pal",
+          "name": "Raoul Pal",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 41,
+          "persona": "raoul-pal",
+          "name": "Raoul Pal",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 42,
+          "persona": "raoul-pal",
+          "name": "Raoul Pal",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 43,
+          "persona": "raoul-pal",
+          "name": "Raoul Pal",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 44,
+          "persona": "raoul-pal",
+          "name": "Raoul Pal",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 45,
+          "persona": "raoul-pal",
+          "name": "Raoul Pal",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 46,
+          "persona": "raoul-pal",
+          "name": "Raoul Pal",
+          "action": "read-book",
+          "frame": 0
+        },
+        {
+          "row": 47,
+          "persona": "raoul-pal",
+          "name": "Raoul Pal",
+          "action": "take-notes",
+          "frame": 0
+        }
+      ]
+    },
+    {
+      "file": "animation-04.png",
+      "rows": [
+        {
+          "row": 0,
+          "persona": "planb",
+          "name": "PlanB",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 1,
+          "persona": "planb",
+          "name": "PlanB",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 2,
+          "persona": "planb",
+          "name": "PlanB",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 3,
+          "persona": "planb",
+          "name": "PlanB",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 4,
+          "persona": "planb",
+          "name": "PlanB",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 5,
+          "persona": "planb",
+          "name": "PlanB",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 6,
+          "persona": "planb",
+          "name": "PlanB",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 7,
+          "persona": "planb",
+          "name": "PlanB",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 8,
+          "persona": "planb",
+          "name": "PlanB",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 9,
+          "persona": "planb",
+          "name": "PlanB",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 10,
+          "persona": "planb",
+          "name": "PlanB",
+          "action": "open-notebook",
+          "frame": 0
+        },
+        {
+          "row": 11,
+          "persona": "planb",
+          "name": "PlanB",
+          "action": "check-phone",
+          "frame": 0
+        },
+        {
+          "row": 12,
+          "persona": "willy-woo",
+          "name": "Willy Woo",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 13,
+          "persona": "willy-woo",
+          "name": "Willy Woo",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 14,
+          "persona": "willy-woo",
+          "name": "Willy Woo",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 15,
+          "persona": "willy-woo",
+          "name": "Willy Woo",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 16,
+          "persona": "willy-woo",
+          "name": "Willy Woo",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 17,
+          "persona": "willy-woo",
+          "name": "Willy Woo",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 18,
+          "persona": "willy-woo",
+          "name": "Willy Woo",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 19,
+          "persona": "willy-woo",
+          "name": "Willy Woo",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 20,
+          "persona": "willy-woo",
+          "name": "Willy Woo",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 21,
+          "persona": "willy-woo",
+          "name": "Willy Woo",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 22,
+          "persona": "willy-woo",
+          "name": "Willy Woo",
+          "action": "open-notebook",
+          "frame": 0
+        },
+        {
+          "row": 23,
+          "persona": "willy-woo",
+          "name": "Willy Woo",
+          "action": "check-phone",
+          "frame": 0
+        },
+        {
+          "row": 24,
+          "persona": "cz",
+          "name": "CZ",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 25,
+          "persona": "cz",
+          "name": "CZ",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 26,
+          "persona": "cz",
+          "name": "CZ",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 27,
+          "persona": "cz",
+          "name": "CZ",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 28,
+          "persona": "cz",
+          "name": "CZ",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 29,
+          "persona": "cz",
+          "name": "CZ",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 30,
+          "persona": "cz",
+          "name": "CZ",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 31,
+          "persona": "cz",
+          "name": "CZ",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 32,
+          "persona": "cz",
+          "name": "CZ",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 33,
+          "persona": "cz",
+          "name": "CZ",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 34,
+          "persona": "cz",
+          "name": "CZ",
+          "action": "open-notebook",
+          "frame": 0
+        },
+        {
+          "row": 35,
+          "persona": "cz",
+          "name": "CZ",
+          "action": "check-phone",
+          "frame": 0
+        }
+      ]
+    },
+    {
+      "file": "animation-05.png",
+      "rows": [
+        {
+          "row": 0,
+          "persona": "gcr",
+          "name": "GCR",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 1,
+          "persona": "gcr",
+          "name": "GCR",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 2,
+          "persona": "gcr",
+          "name": "GCR",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 3,
+          "persona": "gcr",
+          "name": "GCR",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 4,
+          "persona": "gcr",
+          "name": "GCR",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 5,
+          "persona": "gcr",
+          "name": "GCR",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 6,
+          "persona": "gcr",
+          "name": "GCR",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 7,
+          "persona": "gcr",
+          "name": "GCR",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 8,
+          "persona": "gcr",
+          "name": "GCR",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 9,
+          "persona": "gcr",
+          "name": "GCR",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 10,
+          "persona": "gcr",
+          "name": "GCR",
+          "action": "open-notebook",
+          "frame": 0
+        },
+        {
+          "row": 11,
+          "persona": "gcr",
+          "name": "GCR",
+          "action": "check-phone",
+          "frame": 0
+        },
+        {
+          "row": 12,
+          "persona": "cobie",
+          "name": "Cobie",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 13,
+          "persona": "cobie",
+          "name": "Cobie",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 14,
+          "persona": "cobie",
+          "name": "Cobie",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 15,
+          "persona": "cobie",
+          "name": "Cobie",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 16,
+          "persona": "cobie",
+          "name": "Cobie",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 17,
+          "persona": "cobie",
+          "name": "Cobie",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 18,
+          "persona": "cobie",
+          "name": "Cobie",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 19,
+          "persona": "cobie",
+          "name": "Cobie",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 20,
+          "persona": "cobie",
+          "name": "Cobie",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 21,
+          "persona": "cobie",
+          "name": "Cobie",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 22,
+          "persona": "cobie",
+          "name": "Cobie",
+          "action": "open-notebook",
+          "frame": 0
+        },
+        {
+          "row": 23,
+          "persona": "cobie",
+          "name": "Cobie",
+          "action": "check-phone",
+          "frame": 0
+        },
+        {
+          "row": 24,
+          "persona": "ansem",
+          "name": "Ansem",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 25,
+          "persona": "ansem",
+          "name": "Ansem",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 26,
+          "persona": "ansem",
+          "name": "Ansem",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 27,
+          "persona": "ansem",
+          "name": "Ansem",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 28,
+          "persona": "ansem",
+          "name": "Ansem",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 29,
+          "persona": "ansem",
+          "name": "Ansem",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 30,
+          "persona": "ansem",
+          "name": "Ansem",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 31,
+          "persona": "ansem",
+          "name": "Ansem",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 32,
+          "persona": "ansem",
+          "name": "Ansem",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 33,
+          "persona": "ansem",
+          "name": "Ansem",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 34,
+          "persona": "ansem",
+          "name": "Ansem",
+          "action": "open-notebook",
+          "frame": 0
+        },
+        {
+          "row": 35,
+          "persona": "ansem",
+          "name": "Ansem",
+          "action": "check-phone",
+          "frame": 0
+        }
+      ]
+    },
+    {
+      "file": "animation-06.png",
+      "rows": [
+        {
+          "row": 0,
+          "persona": "hsaka",
+          "name": "Hsaka",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 1,
+          "persona": "hsaka",
+          "name": "Hsaka",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 2,
+          "persona": "hsaka",
+          "name": "Hsaka",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 3,
+          "persona": "hsaka",
+          "name": "Hsaka",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 4,
+          "persona": "hsaka",
+          "name": "Hsaka",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 5,
+          "persona": "hsaka",
+          "name": "Hsaka",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 6,
+          "persona": "hsaka",
+          "name": "Hsaka",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 7,
+          "persona": "hsaka",
+          "name": "Hsaka",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 8,
+          "persona": "hsaka",
+          "name": "Hsaka",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 9,
+          "persona": "hsaka",
+          "name": "Hsaka",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 10,
+          "persona": "hsaka",
+          "name": "Hsaka",
+          "action": "open-notebook",
+          "frame": 0
+        },
+        {
+          "row": 11,
+          "persona": "hsaka",
+          "name": "Hsaka",
+          "action": "check-phone",
+          "frame": 0
+        },
+        {
+          "row": 12,
+          "persona": "tetranode",
+          "name": "Tetranode",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 13,
+          "persona": "tetranode",
+          "name": "Tetranode",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 14,
+          "persona": "tetranode",
+          "name": "Tetranode",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 15,
+          "persona": "tetranode",
+          "name": "Tetranode",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 16,
+          "persona": "tetranode",
+          "name": "Tetranode",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 17,
+          "persona": "tetranode",
+          "name": "Tetranode",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 18,
+          "persona": "tetranode",
+          "name": "Tetranode",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 19,
+          "persona": "tetranode",
+          "name": "Tetranode",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 20,
+          "persona": "tetranode",
+          "name": "Tetranode",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 21,
+          "persona": "tetranode",
+          "name": "Tetranode",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 22,
+          "persona": "tetranode",
+          "name": "Tetranode",
+          "action": "open-notebook",
+          "frame": 0
+        },
+        {
+          "row": 23,
+          "persona": "tetranode",
+          "name": "Tetranode",
+          "action": "check-phone",
+          "frame": 0
+        },
+        {
+          "row": 24,
+          "persona": "gwyneth-chen",
+          "name": "Gwyneth Chen",
+          "action": "walk",
+          "frame": 0
+        },
+        {
+          "row": 25,
+          "persona": "gwyneth-chen",
+          "name": "Gwyneth Chen",
+          "action": "walk",
+          "frame": 1
+        },
+        {
+          "row": 26,
+          "persona": "gwyneth-chen",
+          "name": "Gwyneth Chen",
+          "action": "walk",
+          "frame": 2
+        },
+        {
+          "row": 27,
+          "persona": "gwyneth-chen",
+          "name": "Gwyneth Chen",
+          "action": "walk",
+          "frame": 3
+        },
+        {
+          "row": 28,
+          "persona": "gwyneth-chen",
+          "name": "Gwyneth Chen",
+          "action": "type-sitting",
+          "frame": 0
+        },
+        {
+          "row": 29,
+          "persona": "gwyneth-chen",
+          "name": "Gwyneth Chen",
+          "action": "type-sitting",
+          "frame": 1
+        },
+        {
+          "row": 30,
+          "persona": "gwyneth-chen",
+          "name": "Gwyneth Chen",
+          "action": "type-standing",
+          "frame": 0
+        },
+        {
+          "row": 31,
+          "persona": "gwyneth-chen",
+          "name": "Gwyneth Chen",
+          "action": "type-standing",
+          "frame": 1
+        },
+        {
+          "row": 32,
+          "persona": "gwyneth-chen",
+          "name": "Gwyneth Chen",
+          "action": "coffee",
+          "frame": 0
+        },
+        {
+          "row": 33,
+          "persona": "gwyneth-chen",
+          "name": "Gwyneth Chen",
+          "action": "water",
+          "frame": 0
+        },
+        {
+          "row": 34,
+          "persona": "gwyneth-chen",
+          "name": "Gwyneth Chen",
+          "action": "open-notebook",
+          "frame": 0
+        },
+        {
+          "row": 35,
+          "persona": "gwyneth-chen",
+          "name": "Gwyneth Chen",
+          "action": "check-phone",
+          "frame": 0
+        }
+      ]
+    }
+  ]
+}

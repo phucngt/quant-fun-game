@@ -1,0 +1,178 @@
+<script type="application/json" id="god">
+{"weather":"auto","time":"auto","announcement":"","ambient":"auto","deskNote":""}
+</script>
+<div id="qf">
+  <!-- ============ BOOT ============ -->
+  <section id="boot" aria-label="Đang tải">
+    <div class="boot-in">
+      <h1 class="boot-title">QUANT FUN</h1>
+      <p class="boot-sub">XẾP BÀN GIAO DỊCH</p>
+      <div class="track" role="progressbar" aria-label="Tiến độ tải" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="boot-fill"></i></div>
+    </div>
+  </section>
+
+  <!-- ============ TITLE ============ -->
+  <section id="title" hidden aria-label="Màn hình chính">
+    <img class="title-bg" id="title-bg" alt="">
+    <div class="title-shade"></div>
+    <div class="title-in">
+      <div class="kicker"><span class="chip">BTC</span><span class="spaced" id="kicker-text">TRADING DESK</span></div>
+      <h1 class="title-h">QUANT FUN</h1>
+      <i class="rule"></i>
+      <p class="mission">Đội desk chờ lệnh của bạn. Bắt giao cắt SMA 10/30, duyệt lệnh và kết phiên với NAV trên $100.000.</p>
+      <div class="boss-pick">
+        <div class="field">
+          <label class="spaced" for="boss-name">TÊN CỦA BẠN</label>
+          <input id="boss-name" type="text" maxlength="18" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="legend-pick" aria-label="Chọn legend cho Boss">
+          <button class="btn sq" id="boss-prev" type="button" aria-label="Legend trước">◀</button>
+          <div class="lp-mid"><span id="boss-portrait"></span><span class="lp-name" id="boss-legend-name"></span></div>
+          <button class="btn sq" id="boss-next" type="button" aria-label="Legend sau">▶</button>
+        </div>
+      </div>
+      <div class="title-btns">
+        <button class="btn big primary" id="deploy" type="button">VÀO PHÒNG</button>
+        <button class="btn big" id="title-settings" type="button">CÀI ĐẶT</button>
+        <button class="btn big" id="title-help" type="button">CÁCH CHƠI</button>
+      </div>
+      <div class="segs" id="title-segs"></div>
+      <p class="note">Dữ liệu mô phỏng. Mọi hình, dữ liệu và logic chạy ngay trong trình duyệt, không tải gì từ mạng.</p>
+    </div>
+    <button class="linkbtn" id="credits-open" type="button">Credit</button>
+    <div class="keys" aria-hidden="true">
+      <span><kbd>N</kbd> NẾN KẾ</span><span><kbd>A</kbd> APPROVE</span><span><kbd>S</kbd> SKIP</span><span><kbd>/</kbd> GÕ LỆNH</span><span><kbd>ESC</kbd> TẠM DỪNG</span>
+    </div>
+  </section>
+
+  <!-- ============ GAME ============ -->
+  <section id="game" hidden aria-label="Phòng giao dịch">
+    <div class="stage-col">
+      <div class="stage" id="stage">
+        <div class="overlays">
+          <div class="objective" id="objective">
+            <div class="ob-h spaced">MỤC TIÊU · NAV cuối phiên &gt; $100.000</div>
+            <div class="ob-step" id="ob-step"></div>
+            <div class="ob-prog"><div class="bar"><i id="progress-bar"></i></div><span class="num" id="progress-text"></span></div>
+            <div class="ob-wx" id="wxplate" title="Giờ TP.HCM (UTC+7). Thời tiết là mô phỏng theo mùa, không phải dữ liệu thật."><span class="wxi" id="wx-icon" aria-hidden="true"></span><span class="num" id="wx-time">--:--</span><span class="wxl" id="wx-lab"></span></div>
+          </div>
+          <div class="hud-wrap">
+            <div class="hud" aria-label="Danh mục">
+              <div class="tile"><span class="lab">NAV</span><strong class="num" id="nav">—</strong></div>
+              <div class="tile"><span class="lab">PnL</span><strong class="num" id="pnl">—</strong></div>
+              <div class="tile t-opt"><span class="lab">Cash</span><strong class="num" id="cash">—</strong></div>
+              <div class="tile t-opt"><span class="lab">Exposure</span><strong class="num" id="exposure">—</strong></div>
+            </div>
+            <button class="btn sq" id="menu" type="button" aria-label="Tạm dừng">≡</button>
+          </div>
+        </div>
+        <div class="banner" id="banner" role="status" hidden></div>
+        <span class="chip simchip">Dữ liệu mô phỏng</span>
+        <div class="room" id="room" role="group" aria-label="Phòng giao dịch Quant Fun"></div>
+      </div>
+    </div>
+
+    <aside id="chat" aria-label="Chat của desk">
+      <header class="chat-h">
+        <h2 id="chat-title"># quant-fun-desk</h2>
+        <span class="presence" id="presence" aria-hidden="true"></span>
+        <span class="brainchip" id="brainchip"></span>
+        <button class="tog" id="chart-toggle" type="button" aria-expanded="true" aria-controls="chart-wrap">Chart BTC ▾</button>
+      </header>
+      <div class="desknote" id="desknote" hidden></div>
+      <div class="chart-wrap" id="chart-wrap">
+        <canvas id="chart" role="img" aria-label="Biểu đồ nến BTC 5 phút với SMA 10 và SMA 30"></canvas>
+        <div class="legend">
+          <span><i class="ln" style="background:var(--accent)"></i>SMA 10</span>
+          <span><i class="ln" style="background:var(--sma-slow)"></i>SMA 30</span>
+          <span class="up-c"><i class="tri up"></i>Mua</span>
+          <span class="down-c"><i class="tri down"></i>Bán</span>
+          <span class="time num" id="time">—</span>
+        </div>
+      </div>
+      <div class="msgwrap">
+        <div id="messages" role="log" aria-live="polite" aria-label="Tin nhắn"></div>
+        <button class="newpill" id="newpill" type="button" hidden>Tin mới ↓</button>
+      </div>
+      <div id="chips" class="chips" aria-label="Trả lời nhanh"></div>
+      <form id="composer" autocomplete="off">
+        <input id="chat-input" type="text" aria-label="Nhắn tin" placeholder="Nhắn #quant-fun-desk · gõ /help" maxlength="200">
+        <button class="btn primary" id="send" type="submit">Gửi</button>
+      </form>
+    </aside>
+  </section>
+</div>
+
+<dialog id="pause" aria-labelledby="pause-title">
+  <div class="dlg-h"><h2 id="pause-title">Tạm dừng</h2></div>
+  <div class="dlg-b menu">
+    <button class="btn big primary" type="button" data-pause="resume">Tiếp tục</button>
+    <button class="btn big" type="button" data-pause="settings">Cài đặt</button>
+    <button class="btn big" type="button" data-pause="restart">Chơi lại</button>
+    <button class="btn big" type="button" data-pause="home">Về màn hình chính</button>
+    <button class="btn big" type="button" data-pause="credits">Credit</button>
+  </div>
+</dialog>
+
+<dialog id="settings" aria-labelledby="settings-title">
+  <div class="dlg-h"><h2 id="settings-title">Cài đặt</h2><button class="btn" type="button" data-close>Đóng</button></div>
+  <div class="dlg-b">
+    <section>
+      <h3>Bạn và bàn giao dịch</h3>
+      <div class="names" id="set-main"></div>
+    </section>
+    <section>
+      <h3>Đội desk</h3>
+      <p class="hint">Legend đổi tên và hình dáng. Vai trò và luật chơi giữ nguyên. Chọn legend đang dùng ở ghế khác thì hai ghế đổi chỗ.</p>
+      <div class="names" id="set-team"></div>
+    </section>
+    <section>
+      <h3>Chơi</h3>
+      <div class="segs" id="set-segs"></div>
+      <label class="switch"><input type="checkbox" id="motion"> Hoạt cảnh (nhịp bước, đi lại)</label>
+      <label class="switch"><input type="checkbox" id="brain-on"> Trả lời tự do bằng Claude</label>
+      <p class="hint" id="brain-note"></p>
+      <div class="dlg-actions"><button class="btn" type="button" id="team-default">Về đội mặc định</button></div>
+    </section>
+  </div>
+</dialog>
+
+<dialog id="help" aria-labelledby="help-title">
+  <div class="dlg-h"><h2 id="help-title">Cách chơi</h2><button class="btn" type="button" data-close>Đóng</button></div>
+  <div class="dlg-b">
+    <section>
+      <h3>Vòng chơi</h3>
+      <ol class="loop">
+        <li>Giao việc cho Quant theo dõi SMA 10/30.</li>
+        <li>Chạy nến (Next Candle) tới khi có tín hiệu.</li>
+        <li>Quant báo giao cắt, Trader mang đề xuất tới bàn bạn.</li>
+        <li>Risk trả lời Pass hoặc Block. Block thì không duyệt được.</li>
+        <li>Bạn bấm Approve hoặc Skip.</li>
+        <li>Lệnh đã duyệt khớp ở giá mở của nến kế tiếp.</li>
+      </ol>
+    </section>
+    <section>
+      <h3>Ngoài cửa sổ</h3>
+      <p class="hint">Trời ngoài cửa sổ chạy theo giờ Việt Nam (UTC+7) và thời tiết mô phỏng theo mùa ở TP.HCM. Gõ <code>/time 21:00</code> hoặc <code>/weather dông</code> để xem thử, <code>/time auto</code> và <code>/weather auto</code> để trả về mặc định. Cài đặt có mục Cố định ban ngày.</p>
+    </section>
+    <section>
+      <h3>Lệnh trong chat</h3>
+      <div id="help-table"></div>
+    </section>
+  </div>
+</dialog>
+
+<dialog id="credits" class="credits" aria-labelledby="credits-title">
+  <div class="dlg-h"><h2 id="credits-title">Credit</h2><button class="btn" type="button" data-close>Đóng</button></div>
+  <div class="dlg-b">
+    <p><b>Ảnh phòng và bàn làm việc:</b> Pixel Agents — <a href="https://github.com/zkblk/pixel-agents" target="_blank" rel="noopener">github.com/zkblk/pixel-agents</a> (commit 291e760), MIT License, Copyright (c) 2026 W17ANT.</p>
+    <pre>__MIT_PIXEL__</pre>
+    <p><b>22 legend sprite:</b> bộ sprite sheet Quant Fun (7 sheet, 88 tư thế đứng). Tên legend theo danh sách 21 persona của AI Fund. Nhân vật pixel trong game là vai diễn mô phỏng, không đại diện cho người thật và không phải lời của họ.</p>
+    <p><b>Nhân vật Phuc Nguyen:</b> sprite riêng của chủ dự án (Quant Fun).</p>
+    <p><b>Dữ liệu nến tổng hợp và hàm SMA:</b> AI Fund — <a href="https://github.com/cubexch/ai-fund" target="_blank" rel="noopener">github.com/cubexch/ai-fund</a> (commit bb9a243), MIT.</p>
+    <p><b><code>apply_limits</code>, <code>TradingCosts</code>, <code>SimBroker</code>:</b> AI Hedge Fund — <a href="https://github.com/virattt/ai-hedge-fund" target="_blank" rel="noopener">github.com/virattt/ai-hedge-fund</a> (commit 5c553b5), MIT, Copyright (c) 2024 Virat Singh.</p>
+    <p><b>Phông VT323:</b> The VT323 Project Authors, SIL Open Font License 1.1.</p>
+    <p>Thời tiết là mô phỏng theo mùa ở TP.HCM, không phải dữ liệu thời tiết thật.</p>
+    <p>Dữ liệu mô phỏng. Không phải dữ liệu thị trường thật, không phải khuyến nghị đầu tư.</p>
+  </div>
+</dialog>

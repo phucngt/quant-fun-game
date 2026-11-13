@@ -1,0 +1,14 @@
+[
+ {"name":"approve-everything","ops":[{"a":"assign"},{"a":"auto","policy":"approve"},{"a":"next"}]},
+ {"name":"skip-everything","ops":[{"a":"assign"},{"a":"auto","policy":"skip"}]},
+ {"name":"unarmed-run","ops":[{"a":"auto","policy":"approve"}]},
+ {"name":"alloc50-blocked","ops":[{"a":"allocation","v":50},{"a":"assign"},{"a":"until_proposal"},{"a":"next","n":3},{"a":"until_proposal"},{"a":"next","n":3}]},
+ {"name":"alloc25-pass","ops":[{"a":"allocation","v":25},{"a":"assign"},{"a":"until_proposal"},{"a":"approve"},{"a":"next","n":2}]},
+ {"name":"alloc26-block","ops":[{"a":"allocation","v":26},{"a":"assign"},{"a":"until_proposal"},{"a":"next","n":2}]},
+ {"name":"invalid-allocations","ops":[{"a":"allocation","v":0},{"a":"allocation","v":101},{"a":"allocation","v":20.5},{"a":"allocation","v":-3},{"a":"allocation","v":1},{"a":"allocation","v":100},{"a":"allocation","v":"x"},{"a":"allocation","v":null},{"a":"raw","name":"bogus"}]},
+ {"name":"approve-then-reset","ops":[{"a":"assign"},{"a":"until_proposal"},{"a":"approve"},{"a":"next"},{"a":"next","n":5},{"a":"reset"},{"a":"assign"},{"a":"until_proposal"},{"a":"skip"},{"a":"next","n":2}]},
+ {"name":"errors","ops":[{"a":"approve"},{"a":"skip"},{"a":"assign"},{"a":"assign"},{"a":"until_proposal"},{"a":"next"},{"a":"next","n":200}]},
+ {"name":"last-bar","ops":[{"a":"assign"},{"a":"auto","policy":"skip"},{"a":"next"},{"a":"next"}]},
+ {"name":"alloc1-nofill","ops":[{"a":"allocation","v":1},{"a":"assign"},{"a":"auto","policy":"approve"}]},
+ {"name":"approve-half-then-sell","ops":[{"a":"allocation","v":10},{"a":"assign"},{"a":"until_proposal"},{"a":"approve"},{"a":"until_proposal"},{"a":"approve"},{"a":"next"},{"a":"until_proposal"}]}
+]
